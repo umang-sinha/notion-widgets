@@ -4,9 +4,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date and Greeting</title>
+    <title>Date and Greeting Notion Widget</title>
+    <style>
+        #datecontent {
+        display: flex;
+        font-family: sans-serif;
+        font-size: 18pt;
+        color: #ff5757;
+        padding: 5px;
+        border: 1px solid #ffffff;
+        justify-content: left;
+        line-height: 1.5;
+        height:85%;
+        font-weight: bold;
+        flex-direction: row;
+      }
+
+      #container {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      #date{
+          font-size:12pt;
+          font-weight: bold;
+      }
+
+      body{
+          background-color: #2F3437;
+      }
+    </style>
 </head>
 <body>
-    
+    <div id="datecontent"></div>
 </body>
+<script>
+    const weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+
+    let today = new Date();
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+    let seconds = today.getSeconds();
+    let weekday = weekdays[today.getDay()];
+    let month = months[today.getMonth()];
+    let date = today.getDate();
+    let year = today.getFullYear();
+    let dateContent = `${weekday}, ${month} ${date}, ${year}`;
+    let timeContent = `${hours}:${minutes}:${seconds}`
+    console.log(dateContent);
+    console.log(timeContent);
+
+    let greeting;
+
+    if(hours < 12 && hours >= 4){
+        greeting = 'good morning, umang. 🌄';
+    }
+    else if(hours >= 12 && hours < 16){
+        greeting  = 'good afternoon, umang. 🌞';
+    }
+    else if (hours >= 16 && hours < 21){
+        greeting = '⛅ good evening, umang.';
+    }
+    else{
+        greeting = 'good night, umang. 🌛';
+    }
+
+    document.getElementById('datecontent').innerHTML = `
+        <div class="container">
+          <div id="date"> ${dateContent}</div>
+          <div class="greeting">${greeting}</div>
+        <div/>
+    `;
+
+</script>
 </html>
